@@ -28,7 +28,7 @@ const getInventoryByWarehouseId = async (req, res) => {
         const data = await knex("inventories").where({ warehouse_id: req.params.id });
         if (data.length === 0) {
           return res.status(404).json({
-            message: `User with ID ${req.params.id} not found`,
+            message: `Warehouse with ID ${req.params.id} not found`,
           });
         }
         res.status(200).json(data);
