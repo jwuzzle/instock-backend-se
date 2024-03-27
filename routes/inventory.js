@@ -1,8 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid')
 
+const inventoryController = require('../controllers/inventories-controller');
 
+router
+    .route('/')
+    .get(inventoryController.getAllInventory);
+    
+    
+router
+    .route('/:id') 
+    .get(inventoryController.getSingleInventoryById);   
+
+router
+    .route('/warehouse/:id') 
+    .get(inventoryController.getInventoryByWarehouseId);   
 
 
 module.exports = router;
