@@ -15,10 +15,10 @@ app.use(express.json());
 
 //basic routes for the APIs
 app.use('/warehouses', warehouseRoutes);
-app.use('/inventory', inventoryRoutes);
-app.use('/', (_req, res)=>{
+app.use('/inventories', inventoryRoutes);
+app.use('/', (_req, res) => {
     res.status(200).json({
-        'project name':'Instock', 
+        'project name': 'Instock',
         'description': "Group Project",
         'createdBy': "the best team in whole of SOHO NYC"
     })
