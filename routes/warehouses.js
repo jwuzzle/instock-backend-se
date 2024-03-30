@@ -8,4 +8,12 @@ const warehouseController = require('../controllers/warehouses-controllers');
 router.route('/')
   .post(warehouseController.postNewWarehouse)
 
+router
+  .route('/:id')
+  .put(warehouseController.editWarehouse)
+
+
+
+  
+
 module.exports = router;
