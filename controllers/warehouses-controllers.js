@@ -95,4 +95,7 @@ const deleteWarehouse = async (req, res) => {
 
 module.exports = {
     postNewWarehouse,
+    editWarehouse,
+    getSingleWarehouseById,
+    deleteWarehouse
 };
