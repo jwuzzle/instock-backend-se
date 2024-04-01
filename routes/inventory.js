@@ -11,7 +11,8 @@ router
 router
     .route('/:id')
     .get(inventoryController.getSingleInventoryById)
-    .delete(inventoryController.deleteInventoryItem);
+    .delete(inventoryController.deleteInventoryItem)
+    .put(inventoryController.editInventory);
 
 
 router

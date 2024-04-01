@@ -10,7 +10,6 @@ router.route('/')
 
 router
   .route('/:id')
-  .put(warehouseController.editWarehouse)
 
 
 
