@@ -57,6 +57,30 @@ const deleteInventoryItem = async (req, res) => {
     }
 };
 
+
+const editInventory= async (req, res) => {
+    try {
+      const inventoryRowUpdated = await knex("inventories")
+        .where({ id: req.params.id })
+        .update(req.body);
+  
+      if (inventoryRowUpdated === 0) {
+        return res.status(404).json({
+          message: `Inventory with ID ${req.params.id} not found`
+        });
+      }
+  
+      const updatedInventory = await knex("inventories")
+        .where({ id: req.params.id, });
+        res.json(updatedInventory[0]);
+  
+    } catch (error) {
+      res.status(500).json({
+        message: `Unable to update inventory with ID ${req.params.id}: ${error}`
+      });
+    }
+  };
+
 const postInventoryItem = async (req, res) => {
     if (!req.body.item_name || !req.body.description || !req.body.category || !req.body.status || !req.body.quantity || !req.body.warehouse_id) {
         return res.status(400).json({
@@ -77,10 +101,12 @@ const postInventoryItem = async (req, res) => {
     }
 };
 
+
 module.exports = {
     getAllInventory,
     getSingleInventoryById,
     getInventoryByWarehouseId,
     deleteInventoryItem,
+    editInventory,
     postInventoryItem
 };
