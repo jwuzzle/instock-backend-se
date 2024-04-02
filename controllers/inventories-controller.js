@@ -57,6 +57,7 @@ const deleteInventoryItem = async (req, res) => {
     }
 };
 
+
 const editInventory= async (req, res) => {
     try {
       const inventoryRowUpdated = await knex("inventories")
@@ -79,6 +80,7 @@ const editInventory= async (req, res) => {
       });
     }
   };
+
 const postInventoryItem = async (req, res) => {
     if (!req.body.item_name || !req.body.description || !req.body.category || !req.body.status || !req.body.quantity || !req.body.warehouse_id) {
         return res.status(400).json({
@@ -98,6 +100,7 @@ const postInventoryItem = async (req, res) => {
         })
     }
 };
+
 
 module.exports = {
     getAllInventory,
