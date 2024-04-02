@@ -6,6 +6,12 @@ const warehouseController = require("../controllers/warehouses-controllers");
 
 router.route("/").post(warehouseController.postNewWarehouse);
 
-router.route("/").get(warehouseController.getAllWarehouses);
+router.route('/')
+  .post(warehouseController.postNewWarehouse)
+  // .patch(warehouseController.editWarehouse)
+
+router.route('/:id')
+  .patch(warehouseController.editWarehouse)
+  .get(warehouseController.getSingleWarehouseById)
 
 module.exports = router;
