@@ -16,7 +16,7 @@ const getAllInventory = async (_req, res) => {
 
 const getSingleInventoryById = async (req, res) => {
     try {
-        const data = await knex("inventories").where({ id: req.params.micheal }).first();
+        const data = await knex("inventories").where({ id: req.params.id }).first();
         if (!data) {
             return res.status(404).json({
                 message: `User with ID ${req.params.id} not found`,
