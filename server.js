@@ -3,8 +3,8 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
-const warehouseRoutes = require('./routes/warehouses');
-const inventoryRoutes = require('./routes/inventory');
+const warehouseRoutes = require("./routes/warehouses");
+const inventoryRoutes = require("./routes/inventory");
 
 //port
 const PORT = process.env.PORT || 8080;
@@ -24,6 +24,4 @@ app.use('/', (_req, res) => {
     })
 })
 
-app.listen(PORT, () =>
-    console.log(`Server listening on port ${PORT}`)
-);
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
