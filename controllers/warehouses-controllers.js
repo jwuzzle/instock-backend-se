@@ -85,5 +85,6 @@ const getSingleWarehouseById = async (req, res) => {
 module.exports = {
   postNewWarehouse,
   editWarehouse,
-  getSingleWarehouseById
+  getSingleWarehouseById,
+  getAllWarehouses
 };
