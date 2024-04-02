@@ -5,8 +5,8 @@ const inventoryController = require('../controllers/inventories-controller');
 
 router
     .route('/')
-    .get(inventoryController.getAllInventory);
-
+    .get(inventoryController.getAllInventory)
+    .post(inventoryController.postInventoryItem);
 
 router
     .route('/:id')

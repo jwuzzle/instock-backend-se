@@ -79,11 +79,31 @@ const editInventory= async (req, res) => {
       });
     }
   };
+const postInventoryItem = async (req, res) => {
+    if (!req.body.item_name || !req.body.description || !req.body.category || !req.body.status || !req.body.quantity || !req.body.warehouse_id) {
+        return res.status(400).json({
+            message: "Please provide all required information for the new inventory item in the request",
+        });
+    }
+
+    try {
+        const newItem = await knex("inventories").insert(req.body);
+        const newInventoryId = newItem[0];
+        const createdInventory = await knex("inventories").where({ id: newInventoryId });
+
+        res.status(201).json(createdInventory);
+    } catch (error) {
+        res.status(400).json({
+            message: `Unable to create new inventory item`
+        })
+    }
+};
 
 module.exports = {
     getAllInventory,
     getSingleInventoryById,
     getInventoryByWarehouseId,
     deleteInventoryItem,
-    editInventory
+    editInventory,
+    postInventoryItem
 };
