@@ -7,6 +7,7 @@ const warehouseController = require("../controllers/warehouses-controllers");
 router.route("/").post(warehouseController.postNewWarehouse);
 
 router.route('/')
+  .get(warehouseController.getAllWarehouses)
   .post(warehouseController.postNewWarehouse)
   // .patch(warehouseController.editWarehouse)
 
