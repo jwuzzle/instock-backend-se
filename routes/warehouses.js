@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid')
+const { v4: uuidv4 } = require("uuid");
 
-const warehouseController = require('../controllers/warehouses-controllers');
+const warehouseController = require("../controllers/warehouses-controllers");
 
+router.route("/").post(warehouseController.postNewWarehouse);
 
 router.route('/')
   .post(warehouseController.postNewWarehouse)
@@ -12,12 +13,5 @@ router.route('/')
 router.route('/:id')
   .patch(warehouseController.editWarehouse)
   .get(warehouseController.getSingleWarehouseById)
-
-router
-  .route('/:id')
-
-
-
-  
 
 module.exports = router;
