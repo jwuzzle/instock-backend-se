@@ -2,7 +2,6 @@ const knex = require("knex")(require("../knexfile"));
 
 const getAllInventory = async (_req, res) => {
     try {
-        //const data = await knex("inventories");
         const data = await knex
         .from("inventories")
         .select('inventories.id','item_name', 'category', 'status', 'quantity', 'warehouses.warehouse_name')
@@ -16,7 +15,11 @@ const getAllInventory = async (_req, res) => {
 
 const getSingleInventoryById = async (req, res) => {
     try {
-        const data = await knex("inventories").where({ id: req.params.id }).first();
+        const data = await knex
+        .from("inventories")
+        .select('inventories.id','item_name', 'description' ,'category', 'status', 'quantity', 'warehouses.warehouse_name')
+        .join('warehouses', {'warehouses.id': 'inventories.warehouse_id'})
+        .where({ 'inventories.id': req.params.id }).first();
         if (!data) {
             return res.status(404).json({
                 message: `User with ID ${req.params.id} not found`,
