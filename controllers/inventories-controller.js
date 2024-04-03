@@ -16,7 +16,12 @@ const getAllInventory = async (_req, res) => {
 
 const getSingleInventoryById = async (req, res) => {
     try {
-        const data = await knex("inventories").where({ id: req.params.id }).first();
+        //const data = await knex("inventories").where({ id: req.params.id }).first();
+        const data = await knex
+        .from("inventories")
+        .select('inventories.id','item_name','description', 'category', 'status', 'quantity', 'warehouses.warehouse_name')
+        .join('warehouses', {'warehouses.id': 'inventories.warehouse_id'})
+        .where({ 'inventories.id': req.params.id }).first();
         if (!data) {
             return res.status(404).json({
                 message: `User with ID ${req.params.id} not found`,
@@ -62,56 +67,9 @@ const deleteInventoryItem = async (req, res) => {
     }
 };
 
-
-const editInventory= async (req, res) => {
-    try {
-      const inventoryRowUpdated = await knex("inventories")
-        .where({ id: req.params.id })
-        .update(req.body);
-  
-      if (inventoryRowUpdated === 0) {
-        return res.status(404).json({
-          message: `Inventory with ID ${req.params.id} not found`
-        });
-      }
-  
-      const updatedInventory = await knex("inventories")
-        .where({ id: req.params.id, });
-        res.json(updatedInventory[0]);
-  
-    } catch (error) {
-      res.status(500).json({
-        message: `Unable to update inventory with ID ${req.params.id}: ${error}`
-      });
-    }
-  };
-
-const postInventoryItem = async (req, res) => {
-    if (!req.body.item_name || !req.body.description || !req.body.category || !req.body.status || !req.body.quantity || !req.body.warehouse_id) {
-        return res.status(400).json({
-            message: "Please provide all required information for the new inventory item in the request",
-        });
-    }
-
-    try {
-        const newItem = await knex("inventories").insert(req.body);
-        const newInventoryId = newItem[0];
-        const createdInventory = await knex("inventories").where({ id: newInventoryId });
-
-        res.status(201).json(createdInventory);
-    } catch (error) {
-        res.status(400).json({
-            message: `Unable to create new inventory item`
-        })
-    }
-};
-
-
 module.exports = {
     getAllInventory,
     getSingleInventoryById,
     getInventoryByWarehouseId,
-    deleteInventoryItem,
-    editInventory,
-    postInventoryItem
+    deleteInventoryItem
 };
